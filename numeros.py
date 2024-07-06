@@ -1,8 +1,8 @@
-n =  float(input("Por favor, insira um número. "))
+numero =  float(input("Por favor, insira um número. "))
 
-if n > 0:
+if numero > 0:
     print(f"O número é positivo.")
-elif n < 0:
+elif numero < 0:
     print(f"O número é negativo.")
 else:
     print(f"O número é zero.")
