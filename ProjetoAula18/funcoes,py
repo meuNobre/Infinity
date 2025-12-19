@@ -1,0 +1,93 @@
+import mysql.connector
+from datetime import datetime
+
+db_config = {
+    "host": "localhost",
+    "user": "root",
+    "password": "sql1234",
+    "database": "estoque"
+}
+
+
+class Produto:
+    def __init__(self, id, nome, descricao, quantidade, preco):
+        self.id = id
+        self.nome = nome
+        self.descricao = descricao
+        self.quantidade = quantidade
+        self.preco = preco
+
+    def salvar(self):
+        conexao = mysql.connector.connect(**db_config)
+        cursor = conexao.cursor()
+        cursor.execute("""
+            INSERT INTO produtos (nome, descricao, quantidade, preco)
+            VALUES (%s, %s, %s, %s)
+        """, (self.nome, self.descricao, self.quantidade, self.preco))
+        conexao.commit()
+        cursor.close()
+        conexao.close()
+        return "Produto cadastrado com sucesso!"
+
+    
+    def listar():
+        conexao = mysql.connector.connect(**db_config)
+        cursor = conexao.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM produtos")
+        produtos = cursor.fetchall()
+        cursor.close()
+        conexao.close()
+        return produtos
+
+    
+    def atualizar(id, quantidade=None, preco=None):
+        conexao = mysql.connector.connect(**db_config)
+        cursor = conexao.cursor()
+        if quantidade is not None:
+            cursor.execute("UPDATE produtos SET quantidade=%s WHERE id=%s", (quantidade, id))
+        if preco is not None:
+            cursor.execute("UPDATE produtos SET preco=%s WHERE id=%s", (preco, id))
+        conexao.commit()
+        cursor.close()
+        conexao.close()
+        return "Produto atualizado!"
+
+    
+    def excluir(id):
+        conexao = mysql.connector.connect(**db_config)
+        cursor = conexao.cursor()
+        cursor.execute("DELETE FROM produtos WHERE id=%s", (id,))
+        conexao.commit()
+        cursor.close()
+        conexao.close()
+        return "Produto excluído!"
+
+class Venda:
+    def __init__(self, produto_id, quantidade_vendida):
+        self.produto_id = produto_id
+        self.quantidade_vendida = quantidade_vendida
+        self.data_venda = datetime.now()
+
+    def salvar(self):
+        conexao = mysql.connector.connect(**db_config)
+        cursor = conexao.cursor()
+   
+        cursor.execute("SELECT quantidade FROM produtos WHERE id=%s", (self.produto_id,))
+        resultado = cursor.fetchone()
+        if resultado is None:
+            cursor.close()
+            conexao.close()
+            return "Produto não encontrado!"
+        if resultado[0] < self.quantidade_vendida:
+            cursor.close()
+            conexao.close()
+            return "Estoque insuficiente!"
+
+        cursor.execute("UPDATE produtos SET quantidade=quantidade-%s WHERE id=%s",
+                       (self.quantidade_vendida, self.produto_id))
+        cursor.execute("INSERT INTO vendas (produto_id, quantidade_vendida, data_venda) VALUES (%s, %s, %s)",
+                       (self.produto_id, self.quantidade_vendida, self.data_venda))
+        conexao.commit()
+        cursor.close()
+        conexao.close()
+        return "Venda registrada com sucesso!"
