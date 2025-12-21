@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário Responsivo com Nesting CSS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 400px;
+            box-sizing: border-box;
+
+            .campo {
+                position: relative;
+                margin-bottom: 20px;
+
+                input {
+                    width: 100%;
+                    padding: 10px 10px 10px 35px;
+                    border-radius: 5px;
+                    border: 1px solid #ccc;
+                    box-sizing: border-box;
+                }
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: 10px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 15px;
+                    height: 15px;
+                    background-size: cover;
+                }
+
+                &#usuario::before {
+                    content: "\1F464";
+                    font-size: 16px;
+                    left: 10px;
+                    color: #555;
+                }
+
+                &#senha::before {
+                    content: "\1F512";
+                    font-size: 16px;
+                    left: 10px;
+                    color: #555;
+                }
+            }
+
+            button {
+                padding: 10px 20px;
+                border-radius: 5px;
+                border: none;
+                cursor: pointer;
+                margin-right: 10px;
+                position: relative;
+                overflow: hidden;
+                background-color: #4a90e2;
+                color: white;
+                transition: all 0.3s ease;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(255,255,255,0.2);
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    transition: transform 0.3s ease;
+                }
+
+                &:hover::after {
+                    transform: scaleX(1);
+                }
+            }
+        }
+
+        @media (min-width: 768px) {
+            form {
+                width: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            form {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <div class="campo" id="usuario">
+            <input type="text" placeholder="Nome de Usuário">
+        </div>
+        <div class="campo" id="senha">
+            <input type="password" placeholder="Senha">
+        </div>
+        <button type="submit">Enviar</button>
+        <button type="reset">Limpar</button>
+    </form>
+</body>
+</html>
