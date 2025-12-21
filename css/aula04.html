@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exemplo de Paleta de Cores</title>
+    <style>
+        /* Paleta de cores sugerida pelo ChatGPT */
+        :root {
+            --cor-primaria: #4a90e2; /* azul */
+            --cor-secundaria: #50e3c2; /* verde água */
+            --cor-terciaria: #f5a623; /* laranja */
+            --cor-fundo: #f0f0f0; /* cinza claro */
+            --cor-texto: #333333; /* cinza escuro */
+            --cor-botao: #9013fe; /* roxo */
+            --cor-link: #e94e77; /* rosa */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--cor-primaria);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        section {
+            background-color: white;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        aside {
+            background-color: var(--cor-secundaria);
+            color: white;
+            padding: 20px;
+            margin: 20px;
+        }
+
+        footer {
+            background-color: var(--cor-terciaria);
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        button {
+            background-color: var(--cor-botao);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            &:hover {
+            opacity: 0.8;
+        }
+        }
+
+        a {
+            color: var(--cor-link);
+            text-decoration: none;
+            margin: 5px;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Bem-vindo ao Meu Site</h1>
+    </header>
+
+    <section>
+        <h2>Seção Principal</h2>
+        <p>Este é um exemplo de seção com conteúdo principal. Aqui você pode adicionar textos, imagens ou outros elementos.</p>
+        <button>Clique Aqui</button>
+        <a href="#">Saiba Mais</a>
+    </section>
+
+    <aside>
+        <h2>Barra Lateral</h2>
+        <p>Informações adicionais, links importantes ou anúncios podem ficar aqui.</p>
+        <button>Mais Info</button>
+        <a href="#">Link Útil</a>
+    </aside>
+
+    <footer>
+        <p>© 2025 Meu Site | Todos os direitos reservados</p>
+    </footer>
+
+</body>
+</html>
