@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Exemplo Flexbox</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            gap: 20px;
+            background-color: #ffffff;
+            padding: 20px;
+            border: 2px solid #ccc;
+        }
+
+        .caixa {
+            width: 100px;
+            height: 100px;
+            background-color: #4a90e2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="caixa">1</div>
+        <div class="caixa">2</div>
+        <div class="caixa">3</div>
+    </div>
+
+</body>
+</html>
