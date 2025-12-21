@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Variáveis CSS Responsivas</title>
+    <style>
+        /* Variáveis globais */
+        :root {
+            --font-h1: 24px;
+            --font-h2: 20px;
+            --font-p: 16px;
+            --spacing: 10px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: var(--spacing);
+            margin: 0;
+        }
+
+        h1 {
+            font-size: var(--font-h1);
+            margin-bottom: var(--spacing);
+        }
+
+        h2 {
+            font-size: var(--font-h2);
+            margin-bottom: var(--spacing);
+        }
+
+        p {
+            font-size: var(--font-p);
+            margin-bottom: var(--spacing);
+        }
+
+        /* Media Queries para telas médias */
+        @media (min-width: 600px) {
+            :root {
+                --font-h1: 32px;
+                --font-h2: 28px;
+                --font-p: 18px;
+                --spacing: 15px;
+            }
+        }
+
+        /* Media Queries para telas grandes */
+        @media (min-width: 1024px) {
+            :root {
+                --font-h1: 40px;
+                --font-h2: 32px;
+                --font-p: 20px;
+                --spacing: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Título Principal</h1>
+    <h2>Subtítulo</h2>
+    <p>Este é um parágrafo de exemplo para demonstrar o uso de variáveis CSS responsivas. Ajuste o tamanho da janela para ver as mudanças.</p>
+    <p>Outro parágrafo com espaçamento definido pela variável --spacing.</p>
+</body>
+</html>
