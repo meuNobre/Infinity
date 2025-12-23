@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastro de Usuários</title>
+  <style>
+    .erro {
+      color: red;
+      font-size: 12px;
+    }
+    .sucesso {
+      color: green;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="formCadastro">
+    <div>
+      <input type="text" id="nome" placeholder="Nome">
+      <div id="erroNome" class="erro"></div>
+    </div>
+
+    <div>
+      <input type="text" id="usuario" placeholder="Usuário">
+      <div id="erroUsuario" class="erro"></div>
+    </div>
+
+    <div>
+      <input type="password" id="senha" placeholder="Senha">
+      <div id="erroSenha" class="erro"></div>
+    </div>
+
+    <div>
+      <input type="email" id="email" placeholder="Email">
+      <div id="erroEmail" class="erro"></div>
+    </div>
+
+    <div>
+      <input type="date" id="nascimento">
+      <div id="erroIdade" class="erro"></div>
+    </div>
+
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <div id="mensagemSucesso" class="sucesso"></div>
+
+  <script>
+    const form = document.getElementById("formCadastro");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      document.querySelectorAll(".erro").forEach(e => e.textContent = "");
+      document.getElementById("mensagemSucesso").textContent = "";
+
+      try {
+        let nome = document.getElementById("nome").value;
+        let usuario = document.getElementById("usuario").value;
+        let senha = document.getElementById("senha").value;
+        let email = document.getElementById("email").value;
+        let nascimento = document.getElementById("nascimento").value;
+
+        if (!nome) throw { campo: "erroNome", mensagem: "Nome obrigatório" };
+        if (!usuario) throw { campo: "erroUsuario", mensagem: "Usuário obrigatório" };
+        if (!senha || senha.length < 6) throw { campo: "erroSenha", mensagem: "Senha inválida" };
+        if (!email) throw { campo: "erroEmail", mensagem: "Email obrigatório" };
+        if (!nascimento) throw { campo: "erroIdade", mensagem: "Data de nascimento obrigatória" };
+
+        let idade = new Date().getFullYear() - new Date(nascimento).getFullYear();
+        if (idade < 18) throw { campo: "erroIdade", mensagem: "Idade mínima é 18 anos" };
+
+        document.getElementById("mensagemSucesso").textContent =
+          "Cadastro realizado com sucesso!";
+
+        form.reset();
+      } catch (erro) {
+        document.getElementById(erro.campo).textContent = erro.mensagem;
+      }
+    });
+  </script>
+
+</body>
+</html>
