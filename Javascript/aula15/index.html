@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista de Usuários</title>
+  <style>
+    #erro {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="carregar">Carregar Usuários</button>
+  <ul id="listaUsuarios"></ul>
+  <div id="erro"></div>
+
+  <script>
+    const botao = document.getElementById("carregar");
+    const lista = document.getElementById("listaUsuarios");
+    const erroDiv = document.getElementById("erro");
+
+    botao.addEventListener("click", async () => {
+      lista.innerHTML = "";
+      erroDiv.textContent = "";
+
+      try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/users");
+
+        if (!response.ok) {
+          throw new Error("Erro na requisição");
+        }
+
+        const usuarios = await response.json();
+
+        for (let usuario of usuarios) {
+          const li = document.createElement("li");
+          li.textContent = usuario.name + " - " + usuario.email;
+          lista.appendChild(li);
+        }
+      } catch (erro) {
+        erroDiv.textContent =
+          "Erro ao carregar os usuários, tente novamente mais tarde.";
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário com DOM</title>
+</head>
+<body>
+
+  <form id="formulario">
+    <input type="text" id="usuario" placeholder="Usuário">
+    <input type="password" id="senha" placeholder="Senha">
+    <input type="tel" id="telefone" placeholder="Telefone">
+    <input type="date" id="dataNascimento">
+    <input type="email" id="email" placeholder="E-mail">
+    <button type="submit">Enviar</button>
+  </form>
+
+  <button id="limpar">Limpar Lista</button>
+
+  <ul id="lista"></ul>
+
+  <script>
+    const form = document.getElementById("formulario");
+    const lista = document.getElementById("lista");
+    const limpar = document.getElementById("limpar");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      let usuario = document.getElementById("usuario").value;
+      let senha = document.getElementById("senha").value;
+      let telefone = document.getElementById("telefone").value;
+      let data = document.getElementById("dataNascimento").value;
+      let email = document.getElementById("email").value;
+
+      if (!usuario || !senha || !telefone || !data || !email) {
+        console.log("Erro: todos os campos devem ser preenchidos");
+        return;
+      }
+
+      let li = document.createElement("li");
+      li.textContent =
+        "Usuário: " + usuario +
+        " | Telefone: " + telefone +
+        " | Nascimento: " + data +
+        " | Email: " + email;
+
+      lista.appendChild(li);
+      form.reset();
+    });
+
+    limpar.addEventListener("click", function () {
+      lista.innerHTML = "";
+    });
+  </script>
+
+</body>
+</html>

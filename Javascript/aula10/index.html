@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Organizador de Tarefas</title>
+  <style>
+    .concluida {
+      text-decoration: line-through;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+  <input type="text" id="tarefaInput" placeholder="Digite uma tarefa">
+  <button id="addBtn">Adicionar Tarefa</button>
+
+  <ul id="listaTarefas"></ul>
+
+  <script>
+    const input = document.getElementById("tarefaInput");
+    const botao = document.getElementById("addBtn");
+    const lista = document.getElementById("listaTarefas");
+
+    botao.addEventListener("click", () => {
+      let texto = input.value;
+      if (texto === "") return;
+
+      let li = document.createElement("li");
+      li.textContent = texto;
+
+      li.addEventListener("click", () => {
+        li.classList.toggle("concluida");
+      });
+
+      let removerBtn = document.createElement("button");
+      removerBtn.textContent = "Remover";
+
+      removerBtn.addEventListener("click", () => {
+        lista.removeChild(li);
+      });
+
+      li.appendChild(removerBtn);
+      lista.appendChild(li);
+      input.value = "";
+    });
+  </script>
+
+</body>
+</html>

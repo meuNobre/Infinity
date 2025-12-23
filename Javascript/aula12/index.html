@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerenciador de Notas</title>
+</head>
+<body>
+
+  <input type="text" id="tituloNota" placeholder="Título da nota">
+  <button id="addNota">Adicionar Nota</button>
+
+  <ul id="listaNotas"></ul>
+
+  <script>
+    const input = document.getElementById("tituloNota");
+    const botao = document.getElementById("addNota");
+    const lista = document.getElementById("listaNotas");
+
+    function carregarNotas() {
+      lista.innerHTML = "";
+      let notas = JSON.parse(localStorage.getItem("notas")) || [];
+
+      for (let nota of notas) {
+        let li = document.createElement("li");
+        li.textContent = nota.titulo;
+
+        let remover = document.createElement("button");
+        remover.textContent = "Remover";
+
+        remover.addEventListener("click", () => {
+          removerNota(nota.titulo);
+        });
+
+        li.appendChild(remover);
+        lista.appendChild(li);
+      }
+    }
+
+    function salvarNotas(notas) {
+      localStorage.setItem("notas", JSON.stringify(notas));
+    }
+
+    function adicionarNota() {
+      let titulo = input.value;
+      if (!titulo) return;
+
+      let notas = JSON.parse(localStorage.getItem("notas")) || [];
+      notas.push({ titulo });
+
+      salvarNotas(notas);
+      input.value = "";
+      carregarNotas();
+    }
+
+    function removerNota(titulo) {
+      let notas = JSON.parse(localStorage.getItem("notas")) || [];
+      notas = notas.filter(n => n.titulo !== titulo);
+
+      salvarNotas(notas);
+      carregarNotas();
+    }
+
+    botao.addEventListener("click", adicionarNota);
+    carregarNotas();
+  </script>
+
+</body>
+</html>
